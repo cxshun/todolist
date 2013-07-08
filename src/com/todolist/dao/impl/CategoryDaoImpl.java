@@ -15,19 +15,17 @@ import com.todolist.domain.Category;
 public class CategoryDaoImpl implements CategoryDao {
 
 	private Session session;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.session = sessionFactory.openSession();
 	}
-	
+
 	public boolean add(Category category) {
-		try{
+		try {
 			session.save(category);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return false;
-		} finally {
-			session.close();
 		}
 		return true;
 	}
@@ -35,51 +33,36 @@ public class CategoryDaoImpl implements CategoryDao {
 	public boolean update(Category category) {
 		try {
 			session.update(category);
-		} catch(Exception e){
+		} catch (Exception e) {
 			return false;
-		} finally {
-			session.close();
 		}
 		return true;
 	}
 
 	public boolean delete(int id) {
-		try{
+		try {
 			session.delete(get(id));
-		} catch(Exception e){
+		} catch (Exception e) {
 			return false;
-		} finally {
-			session.close();
 		}
 		return true;
 	}
 
 	public Category get(int id) {
-		try {
-			return (Category)session.get(Category.class, id);
-		} finally {
-			session.close();
-		}
+		return (Category) session.get(Category.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Category> getList() {
-		try {
-			Query query = session.createQuery("from Category c");
-			return (List<Category>)query.list();
-		} finally {
-			session.close();
-		}
+		Query query = session.createQuery("from Category c");
+		return (List<Category>) query.list();
 	}
 
 	public Category getByToDoItem(int todoItemId) {
-		try {
-			Query query = session.createQuery("from Category c where c.todoItem = ?");
-			query.setInteger(1, todoItemId);
-			return (Category)query.list().get(0);
-		} finally {
-			session.close();
-		}
+		Query query = session
+				.createQuery("from Category c where c.todoItem = ?");
+		query.setInteger(1, todoItemId);
+		return (Category) query.list().get(0);
 	}
 
 }

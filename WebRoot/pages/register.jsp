@@ -39,20 +39,29 @@
         padding: 7px 9px;
       }
     </style>
+    <script type="text/javascript" src="<c:url value='/script/jquery-2.0.2.min.js' />"></script>
+    <script type="text/javascript">
+    	function checkInput() {
+    		var loginId = $("input[name='user.loginId']").val();
+    		var password = $("input[name='user.password']").val();
+    		var repPassword = $("input[name='user.repPassword']").val();
+    		var email = $("input[name='user.email']").val();
+    	}
+    </script>
 	<title>新用户注册</title>
 </head>
 <body>
 	<div class="container">
-		<form class="form-login" action="<c:url value='/user/add'/>" method="post">
+		<form class="form-login" action="<c:url value='/user/add.action'/>" method="post">
 			<h2 class="form-login-heading">注册信息</h2>
 			<input type="text" class="input-block-level" name="user.loginId"  placeholder="用户名"/>
-			<input type="text" class="input-block-level" name="user.password"  placeholder="密码"/>
-			<input type="text" class="input-block-level" name="user.repPassword" placeholder="重复密码" />
+			<input type="password" class="input-block-level" name="user.password"  placeholder="密码"/>
+			<input type="password" class="input-block-level" name="" placeholder="重复密码" />
 			<input type="text" class="input-block-level" name="user.email" placeholder="Email" />
 			<div class="control-group">
 				<div class="controls">
-					<label class="radio inline" ><input type="radio" name="user.sex"  checked/>男</label>
-					<label class="radio inline"><input type="radio" name="user.sex" />女</label>
+					<label class="radio inline" ><input type="radio" name="user.sex"  checked value="1"/>男</label>
+					<label class="radio inline"><input type="radio" name="user.sex"  value="0"/>女</label>
 				</div>
 			</div>
 			<input type="submit"  class="btn btn-large btn-primary" value="注册" />&nbsp;&nbsp;

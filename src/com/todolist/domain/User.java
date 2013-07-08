@@ -17,7 +17,7 @@ public class User implements Serializable{
 	private String address;
 	private int sex;//性别，1为男，0为女
 	private String email;
-	List<TodoItem> todoItemList;
+	private List<TodoItem> todoItemList;
 	
 	public List<TodoItem> getTodoItemList() {
 		return todoItemList;

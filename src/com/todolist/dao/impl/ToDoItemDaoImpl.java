@@ -26,9 +26,7 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 			session.save(todoItem);
 		} catch (Exception e){
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
@@ -37,9 +35,7 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 			session.update(todoItem);
 		} catch(Exception e) {
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
@@ -48,39 +44,26 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 			session.delete(get(id));
 		} catch(Exception e) {
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
 	public TodoItem get(int id) {
-		try {
-			return (TodoItem)session.get(TodoItem.class, id);
-		} finally {
-			session.close();
-		}
+		return (TodoItem)session.get(TodoItem.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<TodoItem> getList() {
-		try {
-			Query query = session.createQuery("from TodoItem t");
-			return (List<TodoItem>)query.list();
-		} finally {
-			session.close();
-		}
+		Query query = session.createQuery("from TodoItem t");
+		return (List<TodoItem>)query.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<TodoItem> getByCategory(int categoryId) {
-		try {
-			Query query = session.createQuery("from TodoItem t where t.category = ?");
-			query.setInteger(1, categoryId);
-			return query.list();
-		} finally {
-			session.close();
-		}
+		Query query = session
+				.createQuery("from TodoItem t where t.category = ?");
+		query.setInteger(1, categoryId);
+		return query.list();
 	}
 
 }

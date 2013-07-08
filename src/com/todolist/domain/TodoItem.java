@@ -16,10 +16,17 @@ public class TodoItem implements Serializable{
 	private String comment;
 	private Date startDate;
 	private Date endDate;
+	private Date createDate;
 	private boolean isFinish;
 	private Category category;
 	private User user;
 	
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 	public User getUser() {
 		return user;
 	}

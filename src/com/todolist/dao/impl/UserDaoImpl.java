@@ -27,9 +27,7 @@ public class UserDaoImpl implements UserDao{
 			session.save(user);
 		} catch(Exception e) {
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
@@ -38,9 +36,7 @@ public class UserDaoImpl implements UserDao{
 			session.update(user);
 		} catch(Exception e) {
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
@@ -49,48 +45,31 @@ public class UserDaoImpl implements UserDao{
 			session.delete(get(id));
 		} catch(Exception e) {
 			return false;
-		} finally {
-			session.close();
-		}
+		} 
 		return true;
 	}
 
 	public User get(int id) {
-		try {
-			return (User)session.get(User.class, id);
-		} finally {
-			session.close();
-		}
+		return (User)session.get(User.class, id);
 	}
 	
 	public User getByLoginId(String loginId) {
-		try{
-			Query query = session.createQuery("from User u where u.loginId = ?");
-			query.setString(1, loginId);
-			return (User)query.list().get(0);
-		} finally {
-			session.close();
-		}
+		Query query = session.createQuery("from User u where u.loginId = ?");
+		query.setString(1, loginId);
+		return (User)query.list().get(0);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<TodoItem> getToDoItemListById(int id) {
-		try{
-			Query query = session.createQuery("from User u,TodoItem t where t.user = u.id");
-			return (List<TodoItem>)query.list();
-		} finally {
-			session.close();
-		}
+		Query query = session
+				.createQuery("from User u,TodoItem t where t.user = u.id");
+		return (List<TodoItem>)query.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> getList() {
-		try {
-			Query query = session.createQuery("from User");
-			return (List<User>)query.list();
-		} finally {
-			session.close();
-		}
+		Query query = session.createQuery("from User");
+		return (List<User>)query.list();
 	}
 
 }

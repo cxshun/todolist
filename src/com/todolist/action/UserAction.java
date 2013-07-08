@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
 import com.todolist.service.UserService;
@@ -15,7 +16,9 @@ import com.todolist.service.UserService;
  * @author shun
  */
 @Component(value="userAction")
-public class UserAction {
+public class UserAction extends ActionSupport{
+
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserService userService;
@@ -60,7 +63,7 @@ public class UserAction {
 			message = "密码或用户名错误";
 			return "user_login";
 		}
-		return "todoitem_list";
+		return "user_index";
 	}
 	
 	/**
@@ -84,7 +87,7 @@ public class UserAction {
 		} else {
 			message = "注册失败";
 		}
-		return "todoitem_list";
+		return "user_index";
 	}
 	
 	/**

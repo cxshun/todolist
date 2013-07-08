@@ -43,7 +43,7 @@
 </head>
 <body>
 	<div class="container">
-		<form class="form-login" action="<c:url value='/user/add'/>" method="post">
+		<form class="form-login" action="<c:url value='/user/add.action'/>" method="post">
 			<h2 class="form-login-heading">请登录</h2>
 			<input type="text" class="input-block-level" name="user.loginId"  placeholder="用户名"/>
 			<input type="text" class="input-block-level" name="user.password"  placeholder="密码"/>

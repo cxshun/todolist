@@ -19,7 +19,7 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="url" value="jdbc:mysql://localhost:3306/todolist" />
-		<property name="driverClassName" value="com.jdbc.mysql.Driver" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -34,11 +34,11 @@
 			</list>
 		</property>
 		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				hibernate.show_sql=true
-				hibarnate.hbm2ddl.auto=update
-			</value>
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
 		</property>
 	</bean>
 	
