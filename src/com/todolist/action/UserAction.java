@@ -1,5 +1,6 @@
 package com.todolist.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class UserAction extends ActionSupport{
 	
 	private User user;
 	private int id;
-	private Map<String,Object> session;
+	private Map<String,Object> session = new HashMap<String,Object>();
 	private String message;
 	private List<TodoItem> todoItemList;
 	
@@ -50,15 +51,27 @@ public class UserAction extends ActionSupport{
 	}
 	
 	/**
+	 * 进入登录页面，首先会检查一下用户是否已经登录，如果已经登录，直接跳转到todolist的首页
+	 * @param session
+	 * @return
+	 */
+	public String loginPage() {
+		if (session.get("loginId") == null){
+			return "login_page";
+		}
+		return "user_index";
+	}
+	
+	/**
 	 * 用户登录 
 	 * @param session
 	 * @return
 	 */
-	public String login(Map<String,Object> session) {
+	public String login() {
 		User tmpUser = userService.getByLoginId(user.getLoginId());
 		if (tmpUser.getPassword().equals(user.getPassword())) {
-			session.put("LoginId", user.getLoginId());//登录成功后把LoginId放到session中
-																										  //方便我们后面进行用户信息的获取
+			session.put("loginId", user.getLoginId());//登录成功后把LoginId放到session中
+													//方便我们后面进行用户信息的获取
 		} else {
 			message = "密码或用户名错误";
 			return "user_login";
@@ -75,6 +88,13 @@ public class UserAction extends ActionSupport{
 		return "user_login";
 	}
 	
+	/**
+	 * 注册页面
+	 * @return
+	 */
+	public String registerPage() {
+		return "register_page";
+	}
 	/**
 	 * 用户注册
 	 * @return

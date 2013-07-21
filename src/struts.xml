@@ -9,28 +9,35 @@
 	
 	<package name="user" extends="struts-default" namespace="/user">
 		<global-results>
-			<result name="user_index">/pages/index.jsp</result>
+			<result name="user_index">/WEB-INF/pages/index.jsp</result>
 		</global-results>
+		<action name="register" class="userAction" method="registerPage">
+			<result name="register_page">/WEB-INF/pages/register.jsp</result>
+		</action>
 		<!-- 用户注册 -->
 		<action name="add" class="userAction" method="add">
-			<result name="ERROR">/pages/register.jsp</result>
+			<result name="ERROR">/WEB-INF/pages/register.jsp</result>
+		</action>
+		<!-- 跳转到登录页面 -->
+		<action name="login" class="userAction" method="loginPage">
+			<result name="login_page">/WEB-INF/pages/login.jsp</result>
 		</action>
 		<!-- 用户登录 -->
-		<action name="/login" class="userAction" method="login">
+		<action name="doLogin" class="userAction" method="login">
 			<result name="ERROR">/pages/login.jsp</result>
 		</action>
 		<!-- 用户修改信息 -->
-		<action name="/update" class="userAction" method="update">
-			<result name="SUCCESS">/pages/userInfo.jsp</result>
+		<action name="update" class="userAction" method="update">
+			<result name="SUCCESS">/WEB-INF/pages/userInfo.jsp</result>
 			<result name="ERROR"></result>
 		</action>
 		<!-- 取得用户信息 -->
-		<action name="/get" class="userAction" method="get">
-			<result>/pages/userInfo.jsp</result>
+		<action name="get" class="userAction" method="get">
+			<result>/WEB-INF/pages/userInfo.jsp</result>
 		</action>
 		<!-- 取得用户的todoitem列表 -->
 		<action name="getList" class="userAction" method="getToDoItemList">
-			<result name="todoitem_list">/pages/todoitem_list.jsp</result>
+			<result name="todoitem_list">/WEB-INF/pages/todoitem_list.jsp</result>
 		</action>
 		<!-- 删除用户信息（后台功能，暂不开放） -->
 		<!-- <action name="delete" class="userAction" method="delete">
@@ -38,10 +45,10 @@
 		</action>-->
 	</package>
 	
-	<package name="todoitem" extends="struts-default" namespace="todoitem">
+	<package name="todoitem" extends="struts-default" namespace="/todoitem">
 		<global-results>
-			<result name="todoitem_list">/pages/todoitem_list.jsp</result>
-			<result name="todoitem_info">/pages/todoitem_info.jsp</result>
+			<result name="todoitem_list">/WEB-INF/pages/todoitem_list.jsp</result>
+			<result name="todoitem_info">/WEB-INF/pages/todoitem_info.jsp</result>
 		</global-results>
 		<action name="add" class="toDoItemAction" method="add" >
 			<result type="chain">list</result>
@@ -53,10 +60,10 @@
 		<action name="list" class="toDoItemAction" method="list" />
 	</package>
 	
-	<package name="category" extends="struts-default" namespace="category">
+	<package name="category" extends="struts-default" namespace="/category">
 		<global-results>
-			<result name="category_list">/pages/category_list.jsp</result>
-			<result name="category_info">/pages/category_info.jsp</result>
+			<result name="category_list">/WEB-INF/pages/category_list.jsp</result>
+			<result name="category_info">/WEB-INF/pages/category_info.jsp</result>
 		</global-results>
 		<action name="/list" class="categoryAction" method="list" />
 		<action name="/get" class="categoryAction" method="get" />
