@@ -1,5 +1,6 @@
 package com.todolist.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -63,6 +64,13 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 		Query query = session
 				.createQuery("from TodoItem t where t.category = ?");
 		query.setInteger(1, categoryId);
+		return query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TodoItem> getListByDate(Date date) {
+		Query query = session.createQuery("from TodoItem t where t.endDate > ?");
+		query.setDate(1, date);
 		return query.list();
 	}
 

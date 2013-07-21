@@ -17,4 +17,10 @@ public interface ToDoItemService {
 	public List<TodoItem> getList();
 	
 	public List<TodoItem> getByCategory(int categoryId);
+	
+	/**
+	 * @param dateType 日期类型，一周内，一月内，三月内
+	 * @return
+	 */
+	public List<TodoItem> getListByDate(String dateType);
 }

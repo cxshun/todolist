@@ -1,5 +1,6 @@
 package com.todolist.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.todolist.domain.TodoItem;
@@ -50,5 +51,12 @@ public interface ToDoItemDao {
 	 * @return
 	 */
 	public List<TodoItem> getByCategory(int categoryId);
+	
+	/**
+	 * 根据日期取得todoItem
+	 * @param date
+	 * @return
+	 */
+	public List<TodoItem> getListByDate(Date date);
 	
 }
