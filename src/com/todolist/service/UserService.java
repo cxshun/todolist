@@ -2,7 +2,6 @@ package com.todolist.service;
 
 import java.util.List;
 
-import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
 
 /**
@@ -19,10 +18,8 @@ public interface UserService {
 	
 	public User get(int id);
 	
-	public User getByLoginId(String loginId);
+	public User getByUserId(String userId);
 	
 	public List<User> getList();
-	
-	public List<TodoItem> getToDoItemListById(int id);
 	
 }

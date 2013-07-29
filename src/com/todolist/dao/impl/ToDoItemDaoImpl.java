@@ -1,6 +1,5 @@
 package com.todolist.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -40,15 +39,6 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 		return true;
 	}
 
-	public boolean delete(int id) {
-		try{
-			session.delete(get(id));
-		} catch(Exception e) {
-			return false;
-		} 
-		return true;
-	}
-
 	public TodoItem get(int id) {
 		return (TodoItem)session.get(TodoItem.class, id);
 	}
@@ -60,17 +50,9 @@ public class ToDoItemDaoImpl implements ToDoItemDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<TodoItem> getByCategory(int categoryId) {
-		Query query = session
-				.createQuery("from TodoItem t where t.category = ?");
-		query.setInteger(1, categoryId);
-		return query.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<TodoItem> getListByDate(Date date) {
-		Query query = session.createQuery("from TodoItem t where t.endDate > ?");
-		query.setDate(1, date);
+	public List<TodoItem> getList(int userId) {
+		Query query = session.createQuery("from TodoItem t where t.user = ?");
+		query.setInteger(0, userId);
 		return query.list();
 	}
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todolist.dao.UserDao;
-import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
 import com.todolist.service.UserService;
 
@@ -32,16 +31,12 @@ public class UserServiceImpl implements UserService{
 		return userDao.get(id);
 	}
 	
-	public User getByLoginId(String loginId) {
-		return userDao.getByLoginId(loginId);
+	public User getByUserId(String userId) {
+		return userDao.getByUserId(userId);
 	}
 
 	public List<User> getList() {
 		return userDao.getList();
-	}
-
-	public List<TodoItem> getToDoItemListById(int id) {
-		return userDao.getToDoItemListById(id);
 	}
 
 }

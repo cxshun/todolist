@@ -38,6 +38,10 @@ public class UserAction extends ActionSupport{
 		this.user = user;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -68,13 +72,13 @@ public class UserAction extends ActionSupport{
 	 * @return
 	 */
 	public String login() {
-		User tmpUser = userService.getByLoginId(user.getLoginId());
-		if (tmpUser.getPassword().equals(user.getPassword())) {
-			session.put("loginId", user.getLoginId());//登录成功后把LoginId放到session中
+		User tmpUser = userService.getByUserId(user.getUserId());
+		if (user.getPassword().equals(tmpUser.getPassword())) {
+			session.put("loginId", user.getUserId());//登录成功后把LoginId放到session中
 													//方便我们后面进行用户信息的获取
 		} else {
 			message = "密码或用户名错误";
-			return "user_login";
+			return "login_page";
 		}
 		return "user_index";
 	}
@@ -102,12 +106,14 @@ public class UserAction extends ActionSupport{
 	public String add() {
 		boolean flag = userService.add(user);
 		if (flag) {
-			session.put("loginId", user.getLoginId());
+			user.setPassword("");
+			session.put("userId", user.getUserId());
 			message = "注册成功";
+			return "user_index";
 		} else {
 			message = "注册失败";
+			return "register_page";
 		}
-		return "user_index";
 	}
 	
 	/**
@@ -144,19 +150,9 @@ public class UserAction extends ActionSupport{
 	 */
 	public String get() {
 		String userId = (String)session.get("loginId");
-		User user = userService.getByLoginId(userId);
+		User user = userService.getByUserId(userId);
 		user.setPassword("");//把密码设空，暂时的安全策略 TODO
-		
 		return "user_info";
-	}
-	
-	/**
-	 * 取得用户的所有TodoItem
-	 * @return
-	 */
-	public String getToDoItemList() {
-		todoItemList = userService.getToDoItemListById(id);
-		return "todoitem_list";
 	}
 	
 }

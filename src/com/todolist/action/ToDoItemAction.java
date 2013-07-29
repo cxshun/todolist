@@ -1,6 +1,8 @@
 package com.todolist.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +20,28 @@ public class ToDoItemAction {
 	@Autowired
 	private ToDoItemService todoItemService;
 	
-	private int id;
 	private List<TodoItem> todoItemList;
+	
 	private TodoItem todoItem;
 	private String message;
+	private String dateType; //日期类型,三天，一个星期，一个月，三个月
+	
+	private Map<String,Object> session = new HashMap<String,Object>();
+	
+	public void setSession(Map<String,Object> session) {
+		this.session = session;
+	}
+	public Map<String,Object> getSession() {
+		return session;
+	}
+	
+	public String getDateType() {
+		return dateType;
+	}
+	
+	public void setDateType(String dateType) {
+		this.dateType = dateType;
+	}
 	
 	public String getMessage() {
 		return message;
@@ -31,8 +51,8 @@ public class ToDoItemAction {
 		this.todoItem = todoItem;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public TodoItem getTodoItem() {
+		return this.todoItem;
 	}
 	
 	public List<TodoItem> getToDoItemList() {
@@ -60,34 +80,11 @@ public class ToDoItemAction {
 	public String update() {
 		boolean flag = todoItemService.update(todoItem);
 		if (flag) {
-			message ="添加成功了";
+			message ="更新成功了";
 		} else {
-			message = "添加失败了";
+			message = "更新失败了";
 		}
 		return "todoitem_info";
-	}
-	
-	/**
-	 * 删除指定ID的ToDoItem
-	 * @return
-	 */
-	public String delete() {
-		boolean flag = todoItemService.delete(id);
-		if (flag) {
-			message = "添加成功了";
-		} else {
-			message = "添加失败了";
-		}
-		return "todoitem_list";
-	}
-	
-	/**
-	 * 根据分类号取得该分类下的ToDoItem
-	 * @return
-	 */
-	public String listByCategoryId() {
-		todoItemList = todoItemService.getByCategory(id);
-		return "todoitem_list";
 	}
 	
 	/**
@@ -95,7 +92,10 @@ public class ToDoItemAction {
 	 * @return
 	 */
 	public String list() {
-		todoItemList = todoItemService.getList();
+		String userId = (String)session.get("userId");
+		if (userId != null && !"".equals(userId)) {
+			todoItemList = todoItemService.getList(Integer.valueOf(userId));//取得所有todoItem
+		}
 		return "todoitem_list";
 	}
 	

@@ -1,6 +1,5 @@
 package com.todolist.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.todolist.domain.TodoItem;
@@ -26,13 +25,6 @@ public interface ToDoItemDao {
 	public boolean update(TodoItem todoItem);
 	
 	/**
-	 * 根据ID删除相应的TODOITEM
-	 * @param id
-	 * @return
-	 */
-	public boolean delete(int id);
-	
-	/**
 	 * 根据ID取得相应的TODOITEM
 	 * @param id
 	 * @return
@@ -46,17 +38,10 @@ public interface ToDoItemDao {
 	public List<TodoItem> getList();
 	
 	/**
-	 * 根据分类ID取得相应的TODOITEM列表
-	 * @param categoryId
+	 * 取得某个用户的todoItem列表
+	 * @param userId
 	 * @return
 	 */
-	public List<TodoItem> getByCategory(int categoryId);
-	
-	/**
-	 * 根据日期取得todoItem
-	 * @param date
-	 * @return
-	 */
-	public List<TodoItem> getListByDate(Date date);
+	public List<TodoItem> getList(int userId);
 	
 }

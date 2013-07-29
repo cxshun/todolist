@@ -5,8 +5,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap.css' />" />
-	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap-responsive.css' />" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap.min.css' />" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap-responsive.min.css' />" />
 	<style type="text/css">
       body {
         padding-top: 40px;
@@ -47,7 +47,7 @@
     		});
     	});
     	function checkInput() {
-    		var loginId = $("input[name='user.loginId']").val();
+    		var loginId = $("input[name='user.userId']").val();
     		var password = $("input[name='user.password']").val();
     		var repPassword = $("input[name='repPassword']").val();
     		var email = $("input[name='user.email']").val();
@@ -75,10 +75,10 @@
 </head>
 <body>
 	<div class="container">
-		<form class="form-login" action="<c:url value='/user/add'/>" method="post" onsubmit="return checkInput()">
+		<form class="form-login" action="<c:url value='/user/doRegister.action'/>" method="post" onsubmit="return checkInput()">
 			<h2 class="form-login-heading">注册信息</h2>
-			<span style="color:red" id="message"></span>
-			<input type="text" class="input-block-level" name="user.loginId"  placeholder="用户名"/>
+			<div class="alert"></div>
+			<input type="text" class="input-block-level" name="user.userId"  placeholder="用户名"/>
 			<input type="password" class="input-block-level" name="user.password"  placeholder="密码"/>
 			<input type="password" class="input-block-level" name="repPassword" placeholder="重复密码" />
 			<input type="text" class="input-block-level" name="user.email" placeholder="Email" />

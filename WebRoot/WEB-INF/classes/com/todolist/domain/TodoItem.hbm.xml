@@ -7,13 +7,9 @@
             <generator class="native" />
         </id>
         <property name="content" type="java.lang.String" column="CONTENT" />
-        <property name="comment" type="java.lang.String" column="COMMENT" />
-        <property name="startDate" type="java.util.Date" column="STARTDATE" />
+        <property name="createDate" type="java.util.Date" column="CREATEDATE" />
         <property name="endDate" type="java.util.Date" column="ENDDATE" />
         <property name="isFinish" type="boolean" access="field" column="ISFINISH" />
-        <many-to-one name="category" class="com.todolist.domain.Category">
-            <column name="CATEGORY_ID" />
-        </many-to-one>
         <many-to-one name="user" class="com.todolist.domain.User">
             <column name="USER_ID" />
         </many-to-one>

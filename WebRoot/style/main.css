@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+#leftNav {
+	width: 15%;
+	heigth: auto;
+	float: left;
+	margin: 5px;
+}
+
+#rightContent {
+	float: right;
+	width: 78%;
+	padding: 10px;
+	margin: 5px;
+	border: 1px solid #ccc;
+}

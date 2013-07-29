@@ -2,7 +2,6 @@ package com.todolist.dao;
 
 import java.util.List;
 
-import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
 
 /**
@@ -41,17 +40,10 @@ public interface UserDao {
 	
 	/**
 	 * 根据用户登录名取得用户信息
-	 * @param loginId
+	 * @param userId
 	 * @return
 	 */
-	public User getByLoginId(String loginId);
-	
-	/**
-	 * 根据用户ID取得ToDoItem列表
-	 * @param id
-	 * @return
-	 */
-	public List<TodoItem> getToDoItemListById(int id);
+	public User getByUserId(String userId);
 	
 	/**
 	 * 取得用户列表

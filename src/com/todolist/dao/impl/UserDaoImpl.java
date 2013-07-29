@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.todolist.dao.UserDao;
-import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
 
 @Repository
@@ -53,17 +52,13 @@ public class UserDaoImpl implements UserDao{
 		return (User)session.get(User.class, id);
 	}
 	
-	public User getByLoginId(String loginId) {
-		Query query = session.createQuery("from User u where u.loginId = ?");
-		query.setString(1, loginId);
-		return (User)query.list().get(0);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<TodoItem> getToDoItemListById(int id) {
-		Query query = session
-				.createQuery("from User u,TodoItem t where t.user = u.id");
-		return (List<TodoItem>)query.list();
+	public User getByUserId(String userId) {
+		Query query = session.createQuery("from User u where u.userId = ?");
+		query.setString(0, userId);
+		if (query.list().size() > 0) {
+			return (User)query.list().get(0);
+		} 
+		return new User();
 	}
 
 	@SuppressWarnings("unchecked")

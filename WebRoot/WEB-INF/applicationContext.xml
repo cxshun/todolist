@@ -28,7 +28,6 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mappingResources">
 			<list>
-				<value>com/todolist/domain/Category.hbm.xml</value>
 				<value>com/todolist/domain/TodoItem.hbm.xml</value>
 				<value>com/todolist/domain/User.hbm.xml</value>
 			</list>

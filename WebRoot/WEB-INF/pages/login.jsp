@@ -5,8 +5,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap.css'/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap-responsive.css' />" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap.min.css'/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/script/bootstrap/css/bootstrap-responsive.min.css' />" />
 	<style type="text/css">
       body {
         padding-top: 40px;
@@ -43,10 +43,10 @@
 </head>
 <body>
 	<div class="container">
-		<form class="form-login" action="<c:url value='/user/login'/>" method="post">
+		<form class="form-login" action="<c:url value='/user/doLogin.action'/>" method="post">
 			<h2 class="form-login-heading">请登录</h2>
-			<input type="text" class="input-block-level" name="user.loginId"  placeholder="用户名"/>
-			<input type="text" class="input-block-level" name="user.password"  placeholder="密码"/>
+			<input type="text" class="input-block-level" name="user.userId"  placeholder="用户名"/>
+			<input type="password" class="input-block-level" name="user.password"  placeholder="密码"/>
 			<input type="submit"  class="btn btn-large btn-primary" value="登录" />&nbsp;&nbsp;
 			<a href="<c:url value='/user/register.action' />">新用户注册</a>
 		</form>
