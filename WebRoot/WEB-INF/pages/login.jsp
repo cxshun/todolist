@@ -48,7 +48,7 @@
 			<input type="text" class="input-block-level" name="user.userId"  placeholder="用户名"/>
 			<input type="password" class="input-block-level" name="user.password"  placeholder="密码"/>
 			<input type="submit"  class="btn btn-large btn-primary" value="登录" />&nbsp;&nbsp;
-			<a href="<c:url value='/user/register.action' />">新用户注册</a>
+			<a href="<c:url value='/user/register.action' />" class="btn btn-large">新用户注册</a>
 		</form>
 	</div>
 </body>

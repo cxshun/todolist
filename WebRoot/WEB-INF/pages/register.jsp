@@ -77,7 +77,7 @@
 	<div class="container">
 		<form class="form-login" action="<c:url value='/user/doRegister.action'/>" method="post" onsubmit="return checkInput()">
 			<h2 class="form-login-heading">注册信息</h2>
-			<div class="alert"></div>
+			<div class="alert alert-error"></div>
 			<input type="text" class="input-block-level" name="user.userId"  placeholder="用户名"/>
 			<input type="password" class="input-block-level" name="user.password"  placeholder="密码"/>
 			<input type="password" class="input-block-level" name="repPassword" placeholder="重复密码" />
@@ -89,6 +89,7 @@
 				</div>
 			</div>
 			<input type="submit"  class="btn btn-large btn-primary" value="注册" />&nbsp;&nbsp;
+			<a href="<c:url value='/user/login.action' />" class="btn btn-large">有账号,直接登录</a>
 		</form>
 	</div>
 </body>

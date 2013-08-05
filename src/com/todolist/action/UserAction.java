@@ -1,15 +1,18 @@
 package com.todolist.action;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.todolist.constant.Constants;
+import com.todolist.domain.PageBean;
 import com.todolist.domain.TodoItem;
 import com.todolist.domain.User;
+import com.todolist.service.TodoItemService;
 import com.todolist.service.UserService;
 
 /**
@@ -17,19 +20,29 @@ import com.todolist.service.UserService;
  * @author shun
  */
 @Component(value="userAction")
-public class UserAction extends ActionSupport{
+public class UserAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private TodoItemService todoItemService;
+	
 	private User user;
-	private int id;
-	private Map<String,Object> session = new HashMap<String,Object>();
+	private Map<String,Object> session;
 	private String message;
 	private List<TodoItem> todoItemList;
 	
+	private PageBean pageBean;
+	
+	public void setPageBean(PageBean pageBean) {
+		this.pageBean = pageBean;
+	}
+	public PageBean getPageBean() {
+		return pageBean;
+	}
 	public List<TodoItem> getTodoItemList() {
 		return todoItemList;
 	}
@@ -40,10 +53,6 @@ public class UserAction extends ActionSupport{
 	
 	public User getUser() {
 		return user;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getMessage() {
@@ -63,7 +72,7 @@ public class UserAction extends ActionSupport{
 		if (session.get("loginId") == null){
 			return "login_page";
 		}
-		return "user_index";
+		return "to_index";
 	}
 	
 	/**
@@ -74,12 +83,23 @@ public class UserAction extends ActionSupport{
 	public String login() {
 		User tmpUser = userService.getByUserId(user.getUserId());
 		if (user.getPassword().equals(tmpUser.getPassword())) {
-			session.put("loginId", user.getUserId());//登录成功后把LoginId放到session中
+			session.put("userId", user.getUserId());//登录成功后把LoginId放到session中
 													//方便我们后面进行用户信息的获取
 		} else {
 			message = "密码或用户名错误";
 			return "login_page";
 		}
+		return "to_index";
+	}
+	
+	/**
+	 * 进入主页
+	 * @return
+	 */
+	public String index() {
+		user = userService.getByUserId((String)session.get("userId"));
+		pageBean = new PageBean(0,0 + Constants.PAGE_SIZE,Constants.PAGE_SIZE);
+		todoItemList = todoItemService.getList(user.getUserId(),false,pageBean);//取得所有todoItem
 		return "user_index";
 	}
 	
@@ -88,8 +108,8 @@ public class UserAction extends ActionSupport{
 	 * @return
 	 */
 	public String logout() {
-		session.remove("LoginId");
-		return "user_login";
+		session.remove("userId");
+		return "to_login";
 	}
 	
 	/**
@@ -103,17 +123,16 @@ public class UserAction extends ActionSupport{
 	 * 用户注册
 	 * @return
 	 */
-	public String add() {
+	public String save() {
 		boolean flag = userService.add(user);
 		if (flag) {
 			user.setPassword("");
 			session.put("userId", user.getUserId());
-			message = "注册成功";
-			return "user_index";
 		} else {
 			message = "注册失败";
 			return "register_page";
 		}
+		return "to_index";
 	}
 	
 	/**
@@ -128,20 +147,6 @@ public class UserAction extends ActionSupport{
 			message = "更新失败";
 		}
 		return "user_info";
-	}
-	
-	/**
-	 * 删除用户信息，这个需要放后台 TODO
-	 * @return
-	 */
-	public String delete() {
-		boolean flag = userService.delete(id);
-		if (flag) {
-			message = "删除成功";
-		} else {
-			message = "删除失败";
-		}
-		return "user_list";
 	}
 	
 	/**

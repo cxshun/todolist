@@ -11,16 +11,16 @@ public class ServletUtils {
 
 	/**
 	 * 把内容通过json格式写出到response
-	 * @param flag
+	 * @param content
 	 */
-	public static void writeToResponse(boolean flag) {
+	public static void writeToResponse(String content) {
 		HttpServletResponse resp = ServletActionContext.getResponse();
 		resp.setContentType("text/json;charset=utf-8");
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter out = null;
 		try {
 			out = resp.getWriter();
-			out.println(flag);
+			out.println(content);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

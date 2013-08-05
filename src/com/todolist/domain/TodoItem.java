@@ -13,9 +13,8 @@ public class TodoItem implements Serializable{
 
 	private int id;
 	private String content;
-	private Date endDate;
 	private Date createDate;
-	private boolean isFinish;
+	private boolean isFinished;
 	private User user;
 	
 	public Date getCreateDate() {
@@ -42,17 +41,11 @@ public class TodoItem implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getEndDate() {
-		return endDate;
+	public boolean getIsFinished() {
+		return isFinished;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	public boolean isFinish() {
-		return isFinish;
-	}
-	public void setFinish(boolean isFinish) {
-		this.isFinish = isFinish;
+	public void setIsFinished(boolean isFinished) {
+		this.isFinished = isFinished;
 	}
 		
 }

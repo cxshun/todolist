@@ -7,10 +7,9 @@
             <generator class="native" />
         </id>
         <property name="content" type="java.lang.String" column="CONTENT" />
-        <property name="createDate" type="java.util.Date" column="CREATEDATE" />
-        <property name="endDate" type="java.util.Date" column="ENDDATE" />
-        <property name="isFinish" type="boolean" access="field" column="ISFINISH" />
-        <many-to-one name="user" class="com.todolist.domain.User">
+        <property name="createDate" type="java.util.Date" column="CREATEDATE" update="false"/>
+        <property name="isFinished" type="java.lang.Boolean" column="ISFINISHED" />
+        <many-to-one name="user" class="com.todolist.domain.User" update="false">
             <column name="USER_ID" />
         </many-to-one>
     </class>
